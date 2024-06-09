@@ -22,8 +22,7 @@ FORMATTINGS = {
 }
 
 -- The interval in which the chat preview is updated in ticks
-TICK_INTERVAL = 5
-
+UPDATE_INTERVAL = 5
 
 -- ! Do not change anything below this line !
 -- ------------------------------------------
@@ -53,7 +52,7 @@ function events.TICK()
         counter = counter - 1
         return
     else
-        counter = TICK_INTERVAL
+        counter = UPDATE_INTERVAL
     end
 
     if not host:isChatOpen() then 
