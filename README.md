@@ -2,8 +2,8 @@
 A collection of figura avatars and utilities
 
 ## Links
-https://aegorin.de/
-https://wiki.figuramc.org/
+- https://aegorin.de/
+- https://wiki.figuramc.org/
 
 ## Avatars
 Short descriptions of all avatars in this repo
