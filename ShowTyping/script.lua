@@ -7,28 +7,36 @@
 -- Edit the following variables to your liking
 -- -------------------------------------------
 
--- Maximum time (in ticks) the tablist and nameplate should remain changed
+--- Maximum time (in ticks) the tablist and nameplate should remain changed
+--- @type integer
 MAX_COOLDOWN = 200
--- String to display in the tablist while you are typing (after your name)
--- - *Set this to "" if you dont want others to see you typing*
+
+--- String to display in the tablist while you are typing (after your name)
+--- - *Set this to "" if you dont want others to see you typing*
+--- @type string
 TABLIST_STRING = "..."
--- String to display on your nameplate while you are typing
+
+--- String to display on your nameplate while you are typing
+--- @type string
 NAMEPLATE_STRING = "Typing..."
--- Boolean to determine if the string should replace your nameplate or extend it
--- - 'false' will add the string to the nameplate
--- - *You may want to add a space to the NAMEPLATE_STRING if you set this to false*
+
+--- Boolean to determine if the string should replace your nameplate or extend it
+--- - `false` will add the string to the nameplate
+--- - *You may want to add a space to the `NAMEPLATE_STRING` if you set this to false*
+--- @type boolean
 NAMEPLATE_REPLACE = true
 
 
 -- ! Do not change anything below this line !
 -- ------------------------------------------
 
-COMMAND_PATTERN = "/"
-cooldown = 0
+COMMAND_PREFIX = "/"
+
+local cooldown = 0
 
 function events.CHAR_TYPED(char)
     if not host:isChatOpen() then return end
-    if IsCommand(char, host:getChatText()) then return end
+    if (host:getChatText() .. char):isCommand() then return end
 
     -- Set cooldown to max again
     if cooldown < MAX_COOLDOWN / 4 then
@@ -52,7 +60,7 @@ function events.TICK()
     end
 end
 
--- Sets nanameplate and tablist to the typing state
+--- Sets nanameplate and tablist to the typing state
 function pings.IsTyping()
     nameplate.LIST:setText("${name}" .. TABLIST_STRING)
 
@@ -63,24 +71,15 @@ function pings.IsTyping()
     end
 end
 
--- Resets nameplate and tablist to the default state
+--- Resets nameplate and tablist to the default state
 function pings.EndsTyping()
     nameplate.LIST:setText("${name}")
     nameplate.ENTITY:setText("${name}")
 end
 
----Check if the current text + typed char is a command
----@param char string
----@param hostText string?
----@return boolean
-function IsCommand(char, hostText)
-    local CHAT_TEXT
-
-    if hostText == nil then
-        CHAT_TEXT = char
-    else
-        CHAT_TEXT = hostText .. char
-    end
-
-    return CHAT_TEXT:find(COMMAND_PATTERN) == 1
+--- Check if the string is a command
+--- @param self string
+--- @return boolean
+function string:isCommand()
+    return self:find(COMMAND_PREFIX) == 1
 end
