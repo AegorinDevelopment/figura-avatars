@@ -7,7 +7,7 @@
 
 --- Height of the player in cm
 --- @type number
-PLAYER_HEIGHT = 187.5
+PLAYER_HEIGHT = 300
 
 --- Change to `false` if you want to use custom textures
 --- @type boolean
@@ -39,12 +39,6 @@ function SizeToScale(height)
     ScaleValue = height / DEFAULT_HEIGHT
 
     return ScaleValue
-
-    -- if ScaleValue >= 1 then
-    --     BodyPos = (ScaleValue-1) * -24
-    -- else
-    --     BodyPos = (1-ScaleValue) * 24
-    -- end
 end
 
 --- Resizes the model to the given height
@@ -53,11 +47,35 @@ function ResizeModel(height)
     ScaleValue = SizeToScale(height)
 
     models:setScale(ScaleValue, ScaleValue, ScaleValue)
-    renderer.setShadowRadius(0.5 * ScaleValue)
-    nameplate.Entity:setPos(0, BodyPos, 0)
-
-    --renderer:setOffsetCameraPivot(0, BodyPos, 0)
+    renderer:setShadowRadius(0.5 * ScaleValue)
+    nameplate.ENTITY:setPivot(0, ScaleValue * 2.3, 0)
+    nameplate.ENTITY:setScale(ScaleValue, ScaleValue, ScaleValue)
 end
+
+function events.entity_init()
+    ResizeModel(PLAYER_HEIGHT)
+    
+    IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
+
+    models.model.root.LeftArm:setVisible(IS_DEFAULT_TYPE)
+    models.model.root.RightArm:setVisible(IS_DEFAULT_TYPE)
+    models.model.root.LeftArmSlim:setVisible(not IS_DEFAULT_TYPE)
+    models.model.root.RightArmSlim:setVisible(not IS_DEFAULT_TYPE)
+
+    -- ToDo: Set primary texture at root level
+    if USE_SKIN then
+        models.model.root.LeftLeg:setPrimaryTexture("SKIN")
+        models.model.root.RightLeg:setPrimaryTexture("SKIN")
+        models.model.root.Head:setPrimaryTexture("SKIN")
+        models.model.root.Body:setPrimaryTexture("SKIN")
+        models.model.root.LeftArm:setPrimaryTexture("SKIN")
+        models.model.root.RightArm:setPrimaryTexture("SKIN")
+        models.model.root.LeftArmSlim:setPrimaryTexture("SKIN")
+        models.model.root.RightArmSlim:setPrimaryTexture("SKIN")
+    end
+end
+
+
 
 --- Adjusts the camera height based on the given height
 --- @param height number
@@ -76,27 +94,5 @@ function AdjustCameraHeight(height)
     else
         -- camera.FIRST_PERSON.setPos({ 0, 0, 0 })
         -- camera.THIRD_PERSON.setPos({ 0, 0, 0 })
-    end
-end
-
-
-function events.entity_init()
-    IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
-
-    models.model.root.LeftArm:setVisible(IS_DEFAULT_TYPE)
-    models.model.root.RightArm:setVisible(IS_DEFAULT_TYPE)
-    models.model.root.LeftArmSlim:setVisible(!IS_DEFAULT_TYPE)
-    models.model.root.RightArmSlim:setVisible(!IS_DEFAULT_TYPE)
-
-    -- ToDo: Set primary texture at root level
-    if USE_SKIN then
-        models.model.root.LeftLeg:setPrimaryTexture("SKIN")
-        models.model.root.RightLeg:setPrimaryTexture("SKIN")
-        models.model.root.Head:setPrimaryTexture("SKIN")
-        models.model.root.Body:setPrimaryTexture("SKIN")
-        models.model.root.LeftArm:setPrimaryTexture("SKIN")
-        models.model.root.RightArm:setPrimaryTexture("SKIN")
-        models.model.root.LeftArmSlim:setPrimaryTexture("SKIN")
-        models.model.root.RightArmSlim:setPrimaryTexture("SKIN")
     end
 end
