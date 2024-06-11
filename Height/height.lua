@@ -69,25 +69,3 @@ function events.entity_init()
         models.model:setPrimaryTexture("SKIN")
     end
 end
-
-
-
---- Adjusts the camera height based on the given height
---- @param height number
-function AdjustCameraHeight(height)
-    -- ToDo: Add eye offset to the renderer
-    -- https://wiki.figuramc.org/globals/Renderer#setEyeOffset
-
-    if CameraEnabled then
-        if ScaleValue >= 1 then
-            -- renderer.setCameraPos( 0, 1.62 * (ScaleValue-1), 0 )
-            -- camera.THIRD_PERSON.setPos({ 0, 1.62 * (scale_value-1), 4 * (scale_value-1) })
-        else
-            -- camera.FIRST_PERSON.setPos({ 0, 1.62 * -(1-scale_value), 0 })
-            -- camera.THIRD_PERSON.setPos({ 0, 1.62 * -(1-scale_value), 4 * -(1-scale_value) })
-        end
-    else
-        -- camera.FIRST_PERSON.setPos({ 0, 0, 0 })
-        -- camera.THIRD_PERSON.setPos({ 0, 0, 0 })
-    end
-end
