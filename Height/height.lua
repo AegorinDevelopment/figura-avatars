@@ -26,11 +26,6 @@ CameraEnabled = true
 
 vanilla_model.PLAYER:setVisible(false)
 
-keybinds:newKeybind("Toggle Camera Height", "key.keyboard.c", false):setOnRelease(function()
-    CameraEnabled = not CameraEnabled
-    AdjustCameraHeight(PLAYER_HEIGHT)
-end)
-
 
 --- Sets and returns the scale value for the model
 --- @param height number
@@ -69,3 +64,23 @@ function events.entity_init()
         models.model:setPrimaryTexture("SKIN")
     end
 end
+
+function events.render(delta)
+
+    -- Info: Sets the correct positions for crouching
+    if player:getVehicle() ~= nil then
+        models:setPos(0, 1 - ScaleValue * 3, 0)
+    -- Info: Corrects the position of the arms when in first person
+    -- elseif renderer.isFirstPerson() then
+    --     if not arm_enabled then
+    --         model.Body.MIMIC_RIGHT_ARM.setEnabled(false)
+    --     else
+    --         model.Body.MIMIC_RIGHT_ARM.setEnabled(true)
+    --     end
+    -- Info: Sets the default positions
+    else
+        models:setPos(0, 0, 0)
+    end
+end
+
+
