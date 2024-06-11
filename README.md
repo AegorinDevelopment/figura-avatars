@@ -1,9 +1,12 @@
 # Aegorin Figura Avatars
 A collection of figura avatars and utilities
 
-## Links
+## References
 - https://aegorin.de/
 - https://wiki.figuramc.org/
+
+Repo uses grandpa_scout's lua docs
+- https://github.com/GrandpaScout/FiguraRewriteVSDocs
 
 ## Avatars
 Short descriptions of all avatars in this repo
