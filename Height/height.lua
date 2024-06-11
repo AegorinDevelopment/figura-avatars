@@ -7,7 +7,7 @@
 
 --- Height of the player in cm
 --- @type number
-PLAYER_HEIGHT = 100
+PLAYER_HEIGHT = 200
 
 --- Change to `false` if you want to use custom textures
 --- @type boolean
@@ -20,26 +20,20 @@ USE_SKIN = true
 DEFAULT_HEIGHT = 187.5
 
 ScaleValue = 1
-BodyPos = 0
-
-CameraEnabled = true
 
 vanilla_model.PLAYER:setVisible(false)
 
 
 --- Sets and returns the scale value for the model
 --- @param height number
---- @return number
-function SizeToScale(height)
+function SetScaleValue(height)
     ScaleValue = height / DEFAULT_HEIGHT
-
-    return ScaleValue
 end
 
 --- Resizes the model to the given height
 --- @param height number
 function ResizeModel(height)
-    ScaleValue = SizeToScale(height)
+    SetScaleValue(height)
 
     models:setScale(ScaleValue, ScaleValue, ScaleValue)
     renderer:setShadowRadius(0.5 * ScaleValue)
@@ -59,28 +53,16 @@ function events.entity_init()
     models.model.root.LeftArmSlim:setVisible(not IS_DEFAULT_TYPE)
     models.model.root.RightArmSlim:setVisible(not IS_DEFAULT_TYPE)
 
-    -- ToDo: Set primary texture at root level
     if USE_SKIN then
         models.model:setPrimaryTexture("SKIN")
     end
 end
 
-function events.render(delta)
-
-    -- Info: Sets the correct positions for crouching
+function events.render()
+    -- Sets the correct positions for sitting / riding
     if player:getVehicle() ~= nil then
-        models:setPos(0, 1 - ScaleValue * 3, 0)
-    -- Info: Corrects the position of the arms when in first person
-    -- elseif renderer.isFirstPerson() then
-    --     if not arm_enabled then
-    --         model.Body.MIMIC_RIGHT_ARM.setEnabled(false)
-    --     else
-    --         model.Body.MIMIC_RIGHT_ARM.setEnabled(true)
-    --     end
-    -- Info: Sets the default positions
+        models:setPos(0, -10 * ScaleValue + 10 , 0)
     else
         models:setPos(0, 0, 0)
     end
 end
-
-
