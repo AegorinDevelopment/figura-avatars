@@ -43,8 +43,6 @@ end
 
 function events.entity_init()
     ResizeModel(PLAYER_HEIGHT)
-    log(ScaleValue)
-    log(1 - ScaleValue * 3)
     
     IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
 
