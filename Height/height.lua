@@ -7,7 +7,7 @@
 
 --- Height of the player in cm
 --- @type number
-PLAYER_HEIGHT = 300
+PLAYER_HEIGHT = 100
 
 --- Change to `false` if you want to use custom textures
 --- @type boolean
@@ -54,6 +54,8 @@ end
 
 function events.entity_init()
     ResizeModel(PLAYER_HEIGHT)
+    log(ScaleValue)
+    log(1 - ScaleValue * 3)
     
     IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
 
