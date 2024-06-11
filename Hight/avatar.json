@@ -1,8 +1,9 @@
 {
-  "name": "Hight",
-  "description": "Change you hight",
+  "name": "Height",
+  "description": "Change you height",
   "authors": [
-    "CuddleCat_"
+    "CuddleCat_",
+    "Valaron/Jakob/Anfauglir"
   ],
   "color": "#00f0ff"
 }
