@@ -64,14 +64,7 @@ function events.entity_init()
 
     -- ToDo: Set primary texture at root level
     if USE_SKIN then
-        models.model.root.LeftLeg:setPrimaryTexture("SKIN")
-        models.model.root.RightLeg:setPrimaryTexture("SKIN")
-        models.model.root.Head:setPrimaryTexture("SKIN")
-        models.model.root.Body:setPrimaryTexture("SKIN")
-        models.model.root.LeftArm:setPrimaryTexture("SKIN")
-        models.model.root.RightArm:setPrimaryTexture("SKIN")
-        models.model.root.LeftArmSlim:setPrimaryTexture("SKIN")
-        models.model.root.RightArmSlim:setPrimaryTexture("SKIN")
+        models.model:setPrimaryTexture("SKIN")
     end
 end
 
