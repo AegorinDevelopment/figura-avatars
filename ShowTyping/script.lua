@@ -36,7 +36,7 @@ local cooldown = 0
 
 function events.CHAR_TYPED(char)
     if not host:isChatOpen() then return end
-    if (host:getChatText() .. char):isCommand() then return end
+    if IsCommand(host:getChatText() .. char) then return end
 
     -- Set cooldown to max again
     if cooldown < MAX_COOLDOWN / 4 then
@@ -78,8 +78,8 @@ function pings.EndsTyping()
 end
 
 --- Check if the string is a command
---- @param self string
+--- @param text string
 --- @return boolean
-function string:isCommand()
-    return self:find(COMMAND_PREFIX) == 1
+function IsCommand(text)
+    return text:find(COMMAND_PREFIX) == 1
 end
