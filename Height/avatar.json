@@ -1,9 +1,10 @@
 {
-  "name": "§8[§7Utils§8] §3Height",
-  "description": "Change you height!",
-  "authors": [
-    "CuddleCat_",
-    "Valaron/Jakob/Anfauglir"
-  ],
-  "color": "#00f0ff"
+	"name": "§8[§7Utils§8] §3Height",
+	"description": "Change you height!",
+	"authors": [
+		"CuddleCat_",
+		"Valaron/Jakob/Anfauglir"
+	],
+	"version": "0.1.4",
+	"color": "#00AAAA"
 }

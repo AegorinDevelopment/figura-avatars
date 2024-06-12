@@ -4,5 +4,6 @@
     "authors":[
         "Anfauglir/Valaron/Jakob"
     ],
-    "version":"0.1.0"
+	"version": "0.1.4",
+	"color": "#00AAAA"
 }
