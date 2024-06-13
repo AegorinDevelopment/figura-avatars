@@ -33,3 +33,5 @@ Follow these steps to attach a model part to the base avatar
 1. Download the last custom parts release
 2. Open figura -> folder model parts
 3. Choose a model part to use
+
+...
