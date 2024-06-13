@@ -22,3 +22,6 @@ Adds an action to the actionwheel to switch between channel, activating the chat
 
 ### Action
 Adds an action to the actionwheel to execute the action command, activating the chat function in the dev section in figura is needed
+
+### AnimKeys
+Adds option to toggle animations on or off with keys on your keyboard
