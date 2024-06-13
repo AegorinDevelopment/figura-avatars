@@ -41,14 +41,18 @@ for _, keybind in ipairs(KEYBINDS) do
     key.press = function(modifier)
         if modifier ~= keybind.mod then return end
 
+        local keyNew = not keyStates[keybind.anim]
+
         -- Turn off all states
         for _, value in pairs(keyStates) do
             keyStates[_] = false
         end
 
         -- Switch only given keyState
-        keyStates[keybind.anim] = not keyStates[keybind.anim]
+        keyStates[keybind.anim] = keyNew
         pings.animPing(keyStates)
+
+        log(keybind.name .. " " .. (keyStates[keybind.anim] and "enabled" or "disabled"))
     end
 end
 
@@ -58,6 +62,6 @@ function pings.animPing(states)
     if not player:isLoaded() then return end
 
     for anim, state in pairs(states) do
-        animations.base[anim]:setPlaying(state)
+        --animations.base[anim]:setPlaying(state)
     end
 end
