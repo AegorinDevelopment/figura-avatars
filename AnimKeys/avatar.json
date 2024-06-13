@@ -1,0 +1,9 @@
+{
+    "name":"§8[§7Utils§8] §3AnimKeys",
+    "description":"Display animations on button click",
+    "authors":[
+        "Anfauglir/Valaron/Jakob"
+    ],
+	"version": "0.1.4",
+	"color": "#00AAAA"
+}
