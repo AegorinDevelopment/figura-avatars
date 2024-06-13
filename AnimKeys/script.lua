@@ -53,6 +53,8 @@ end
 --- Updates all animations
 --- @param states table<string, boolean>
 function pings.animPing(states)
+    if not player:isLoaded() then return end
+    
     for anim, state in pairs(states) do
         animations.base[anim]:setPlaying(state)
     end
