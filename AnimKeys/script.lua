@@ -43,7 +43,7 @@ for _, keybind in ipairs(KEYBINDS) do
 
         -- Turn off all states
         for _, value in pairs(keyStates) do
-            keyStates[value] = false
+            keyStates[_] = false
         end
 
         -- Switch only given keyState
