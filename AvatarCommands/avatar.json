@@ -1,0 +1,9 @@
+{
+    "name":"§8[§7Utils§8] §3AvatarCommands",
+    "description":"Add custom commands and save input to config",
+    "authors":[
+        "Anfauglir/Valaron/Jakob"
+    ],
+	"version": "0.1.4",
+	"color": "#00AAAA"
+}
