@@ -1,5 +1,6 @@
 
-local candler = require("AvatarCommands.Candler.candler")
+-- local candler = require("AvatarCommands.Candler.candler") -- Uncomment for intellisense
+local candler = require("Candler.candler")
 
 candler.newCategory("Test", {
     description = "Desc for Test category"
@@ -16,8 +17,8 @@ candler.setCommand("Test", "test", {
         }
     }
 }, function(args)
-    if args[0] then
-        print("Test command ran with arg: " .. args[0])
+    if args[1] then
+        print("Test command ran with arg: " .. args[1])
     else
         print("Test command ran!")
     end
