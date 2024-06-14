@@ -7,6 +7,7 @@ A collection of figura avatars and utilities
 
 Repo uses grandpa_scout's lua docs
 - https://github.com/GrandpaScout/FiguraRewriteVSDocs
+
 As well as Slymeball's `Candler` command lib
 - https://github.com/Slymeball/Candler
 
