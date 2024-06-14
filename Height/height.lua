@@ -79,3 +79,20 @@ function GetModelChildsAssoc(model)
 
     return childTable
 end
+
+--- Loads custom parts and moves them to the correct position
+function LoadCustomParts()
+    local defaultBones = GetModelChildsAssoc(models.base.root)
+    local parts = GetModelChildsAssoc(models)
+    parts["base"] = nil
+
+    for _, part in pairs(parts) do
+        local bones = part:getChildren()
+
+        for _, bone in pairs(bones) do
+            if defaultBones[bone:getName()] ~= nil then
+                bone:moveTo(defaultBones[bone:getName()])
+            end
+        end
+    end
+end
