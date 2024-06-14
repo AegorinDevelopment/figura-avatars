@@ -49,13 +49,20 @@ function events.entity_init()
     
     IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
 
-    models.base.root.LeftArm:setVisible(IS_DEFAULT_TYPE)
-    models.base.root.RightArm:setVisible(IS_DEFAULT_TYPE)
-    models.base.root.LeftArmSlim:setVisible(not IS_DEFAULT_TYPE)
-    models.base.root.RightArmSlim:setVisible(not IS_DEFAULT_TYPE)
+    models.base.root.LeftArm.LA_Default:setVisible(IS_DEFAULT_TYPE)
+    models.base.root.RightArm.RA_Default:setVisible(IS_DEFAULT_TYPE)
+    models.base.root.LeftArm.LA_Slim:setVisible(not IS_DEFAULT_TYPE)
+    models.base.root.RightArm.RA_Slim:setVisible(not IS_DEFAULT_TYPE)
 
     if USE_SKIN then
-        models.base:setPrimaryTexture("SKIN")
+        models.base.root.Head.H_Default:setPrimaryTexture("SKIN")
+        models.base.root.Body.B_Default:setPrimaryTexture("SKIN")
+        models.base.root.LeftArm.LA_Default:setPrimaryTexture("SKIN")
+        models.base.root.LeftArm.LA_Slim:setPrimaryTexture("SKIN")
+        models.base.root.RightArm.RA_Default:setPrimaryTexture("SKIN")
+        models.base.root.RightArm.RA_Slim:setPrimaryTexture("SKIN")
+        models.base.root.LeftLeg.LL_Default:setPrimaryTexture("SKIN")
+        models.base.root.RightLeg.RL_Default:setPrimaryTexture("SKIN")
     end
 end
 
