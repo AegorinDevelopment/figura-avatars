@@ -1,5 +1,3 @@
-
--- local candler = require("AvatarCommands.Candler.candler") -- Uncomment for intellisense
 local candler = require("Candler.candler")
 
 candler.newCategory("Test", {
