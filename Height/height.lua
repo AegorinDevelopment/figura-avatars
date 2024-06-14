@@ -43,6 +43,7 @@ end
 
 function events.entity_init()
     ResizeModel(PLAYER_HEIGHT)
+    LoadCustomParts()
     
     IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
 
@@ -63,4 +64,18 @@ function events.render()
     else
         models:setPos(0, 0, 0)
     end
+end
+
+--- Converts modelparts to an indexed table
+--- @param model ModelPart
+--- @return table<string, ModelPart>
+function GetModelChildsAssoc(model)
+    local children = model:getChildren()
+    local childTable = {}
+
+    for _, child in pairs(children) do
+        childTable[child:getName()] = child
+    end
+
+    return childTable
 end
