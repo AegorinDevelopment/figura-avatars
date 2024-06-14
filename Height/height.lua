@@ -87,16 +87,16 @@ function LoadCustomParts()
     parts["base"] = nil
 
     for _, part in pairs(parts) do
-        -- if part == nil then goto continue end
-        
         local bones = part:getChildren()
 
         for _, bone in pairs(bones) do
             if defaultBones[bone:getName()] ~= nil then
-                bone:moveTo(defaultBones[bone:getName()])
+                local subBones = bone:getChildren()
+
+                for _, subBone in pairs(subBones) do
+                    subBone:moveTo(defaultBones[bone:getName()])
+                end
             end
         end
-
-        -- ::continue::
     end
 end
