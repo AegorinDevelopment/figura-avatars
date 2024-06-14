@@ -43,7 +43,6 @@ end
 
 function events.entity_init()
     ResizeModel(PLAYER_HEIGHT)
-    LoadCustomParts()
     
     IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
 
@@ -63,40 +62,5 @@ function events.render()
         models:setPos(0, -10 * ScaleValue + 10 , 0)
     else
         models:setPos(0, 0, 0)
-    end
-end
-
---- Converts modelparts to an indexed table
---- @param model ModelPart
---- @return table<string, ModelPart>
-function GetModelChildsAssoc(model)
-    local children = model:getChildren()
-    local childTable = {}
-
-    for _, child in pairs(children) do
-        childTable[child:getName()] = child
-    end
-
-    return childTable
-end
-
---- Loads custom parts and moves them to the correct position
-function LoadCustomParts()
-    local defaultBones = GetModelChildsAssoc(models.base.root)
-    local parts = GetModelChildsAssoc(models)
-    parts["base"] = nil
-
-    for _, part in pairs(parts) do
-        local bones = part:getChildren()
-
-        for _, bone in pairs(bones) do
-            if defaultBones[bone:getName()] ~= nil then
-                local subBones = bone:getChildren()
-
-                for _, subBone in pairs(subBones) do
-                    subBone:moveTo(defaultBones[bone:getName()])
-                end
-            end
-        end
     end
 end
