@@ -23,6 +23,8 @@ ScaleValue = 1
 
 vanilla_model.PLAYER:setVisible(false)
 
+local parts = require("loadParts")
+
 
 --- Sets and returns the scale value for the model
 --- @param height number
@@ -42,6 +44,7 @@ function ResizeModel(height)
 end
 
 function events.entity_init()
+    parts.loadCustomParts()
     ResizeModel(PLAYER_HEIGHT)
     
     IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
