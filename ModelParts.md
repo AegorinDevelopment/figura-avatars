@@ -32,8 +32,8 @@ Follow these steps to create your first own model part
     - Make sure it is written correct! (Case sensitive)
 3. Save your part and the texture inside the avatar
 
-![BlockBench Reference](blockbench-reference-modelparts.png)
-
 > **Hint** - Use the `_template_body.bbmodel` from the `_template` 
 and create your model inside it. Then remove all other other folders 
 and cubes. This way the pivot point is already at the correct position.
+
+![BlockBench Reference](blockbench-reference-modelparts.png)
