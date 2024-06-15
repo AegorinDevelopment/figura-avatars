@@ -22,6 +22,8 @@ This is the main avatar with multiple scripts combined to a single easy to use a
 - Read more about it here: [Avatar ReadMe](https://github.com/AegorinDevelopment/figura-avatars/blob/master/AvatarRPBase/AvatarReadMe.md)
 
 ### ModelParts
+> Containing multiple avatars
+
 A list of avatars containing custom model parts free to use and ready to be 
 copied to the `AvatarRPBase`
 
