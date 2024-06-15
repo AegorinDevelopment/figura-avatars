@@ -3,6 +3,11 @@
 
 > Using code from `GrandpaScout` and `Slymeball`
 
+If you like what i do, consider contributing to the project, sharing it to others 
+or even spending a coffee on [ko-fi](https://ko-fi.com/valaron)
+
+https://github.com/AegorinDevelopment/figura-avatars
+
 ## Features
 - Change your characters height with a simple command
 - Switch between emote poses with the press of a button
