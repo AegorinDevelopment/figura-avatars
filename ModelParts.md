@@ -5,6 +5,9 @@ If you follow these instructions, your model part can be easily copied
 and pasted into any avatar to use. It will also work with the full 
 `AvatarRPBase` by pasting the model into the `parts` folder.
 
+## Existing Parts
+Find a growing list of possible custom parts as well as a `_template` 
+in the `ModelParts` folder.
 
 ## Creation
 Follow these steps to create your first own model part

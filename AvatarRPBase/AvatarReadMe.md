@@ -47,7 +47,7 @@ When following the correct format, they are properly resized and animated as wel
 
 Just copy your custom parts inside the `parts` folder and reload your avatar.
 
-> [How to create custom parts]()
+> [How to create custom parts](https://github.com/AegorinDevelopment/figura-avatars/blob/master/ModelParts.md)
 
 
 ## Known Issues

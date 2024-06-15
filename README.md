@@ -18,7 +18,14 @@ Short descriptions of all avatars in this repo
 > Containing multiple scripts
 
 This is the main avatar with multiple scripts combined to a single easy to use avatar for MC roleplay
-- Read more about it here: [AvatarReadMe](https://github.com/AegorinDevelopment/figura-avatars/blob/master/AvatarRPBase/AvatarReadMe.md)
+
+- Read more about it here: [Avatar ReadMe](https://github.com/AegorinDevelopment/figura-avatars/blob/master/AvatarRPBase/AvatarReadMe.md)
+
+### ModelParts
+A list of avatars containing custom model parts free to use and ready to be 
+copied to the `AvatarRPBase`
+
+- Read more about it here: [ModelParts ReadMe](https://github.com/AegorinDevelopment/figura-avatars/blob/master/ModelParts.md)
 
 ### Action
 Adds an action to the actionwheel to execute the action command, activating the chat function in the dev section in figura is needed
