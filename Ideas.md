@@ -1,13 +1,8 @@
 # Ideas
 A collection of new ideas for the project
 
-## Automatic part adding 
-> Valaron - Branch: `LoadCustomParts`
-- A script that automatically attaches model parts in the main folder to their 
-    corresponding base part if the follow the part format
+## Allow model parts to disable default
+Basically adding a suffix like `Replace` and toggling the default part off if this exists on the custom part
 
-## Add commands and config
-> Valaron
-- Addin commands and a config to allow players to switch height, position or more from ingame
-- Config needs to load and ping on start
-- Possible resource for commands https://github.com/Slymeball/Candler/tree/main
+## Allow model parts to use physics
+Testing one of the physics libraries to dynamically add physics to custom parts
