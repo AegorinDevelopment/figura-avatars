@@ -9,3 +9,8 @@ Testing one of the physics libraries to dynamically add physics to custom parts
 - https://github.com/ChloeSpacedOut/figura-physbone-api
 - https://github.com/Manuel-3/figura-scripts/tree/main/src/swingingphysics
 - https://github.com/lua-gods/figuraLibraries/tree/main/tail%20and%20ears
+
+## Change camera pos
+- Change with height (all 3 cameras)
+- Change on pose
+- Allow toggle with hotkey
