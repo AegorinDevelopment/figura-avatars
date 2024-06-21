@@ -36,6 +36,7 @@ function ResizeModel(height)
     SetScaleValue(height)
 
     models.avatar:setScale(ScaleValue, ScaleValue, ScaleValue)
+    models.avatar:setSwing()
     renderer:setShadowRadius(0.5 * ScaleValue)
     nameplate.ENTITY:setPivot(0, ScaleValue * 2.3, 0)
     nameplate.ENTITY:setScale(ScaleValue, ScaleValue, ScaleValue)
