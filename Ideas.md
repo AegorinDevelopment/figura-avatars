@@ -14,3 +14,8 @@ Testing one of the physics libraries to dynamically add physics to custom parts
 - Adding a skins folder to place multipe skin files
 - Loading all skins on init creating indices and commands
 - Ping skin changes every few seconds
+
+## Change camera pos
+- Change with height (all 3 cameras)
+- Change on pose
+- Allow toggle with hotkey
