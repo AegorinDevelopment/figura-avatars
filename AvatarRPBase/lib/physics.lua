@@ -118,7 +118,7 @@ local SwingHandler = {
     setEnabled = function(self, enabled) end
 }
 
---- Adds swinging physics to a part that is attached to the head
+--- Adds swinging physics to a part that is attached to the head or body
 --- @param part ModelPart The model part that should swing
 --- @param type "Head"|"Body" Parent type the physics should use
 --- @param limits table|nil Limits the rotation of the part to make it appear like its colliding with something. Format: {xLow, xHigh, yLow, yHigh, zLow, zHigh} (optional)
@@ -127,127 +127,84 @@ local SwingHandler = {
 --- @return SwingHandler
 function lib.setSwing(part, type, limits, root, depth)
     assert(part, "Model Part does not exist!")
-    
-    local dir = getAngleToCenter(part:getPivot())
 
-    local _rot = vec(0,0,0)
-    local rot = vec(0,0,0)
+    --if depth == nil then depth = 0 end
+    depth = depth or 0
+    
+    local angleToCenter = getAngleToCenter(part:getPivot())
+
+    local _rotation = vec(0,0,0)
+    local rotation = vec(0,0,0)
     local velocity = vec(0,0,0)
-    if depth == nil then depth = 0 end
-    local fric = FRICTION*math.pow(1.5, depth)
+
+    local downPart
+    local forcePart
+
+    if type == "Head" then
+        downPart = downHead
+        forcePart = forceHead
+    elseif type == "Body" then
+        downPart = downBody
+        forcePart = forceBody
+    else
+        error("Invalid type: " .. type .. " ['Head'/'Body']")
+    end
+
+    _FRICTION = FRICTION * math.pow(1.5, depth)
+
     local handler = {
-        ---@type SwingHandler
+        --- @type SwingHandler
     }
+
     handler.enabled = true
-    ---@param enabled boolean
+    --- @param enabled boolean
     function handler:setEnabled(enabled)
         self.enabled = enabled
         if not self.enabled then
-            rot = vec(0,0,0)
-            _rot = rot
-            part:setOffsetRot(rot)
+            rotation = vec(0, 0, 0)
+            _rotation = rotation
+            part:setOffsetRot(rotation)
         end
     end
-    function events.tick()
+
+    events.tick:register(function()
         if not handler.enabled then return end
 
-        _rot = rot
+        _rotation = rotation
 
-        local grav
+        local gravity
         if root ~= nil then
-            grav = ((downHead - root:getOffsetRot()) - rot) * GRAVITY
+            gravity = GRAVITY * (-rotation + (downPart - root:getOffsetRot()))
         else
-            grav = (downHead - rot) * GRAVITY
+            gravity = GRAVITY * (-rotation + downPart)
         end
         
-        velocity = velocity + grav + vec(
-            sin_rad(dir)*forceHead-cos_rad(moveAngle)*playerSpeed+cos_rad(dir)*math.abs(forceHead)*CENTRIFUGAL_FORCE,
-            0,
-            cos_rad(dir)*forceHead+sin_rad(moveAngle)*playerSpeed-sin_rad(dir)*math.abs(forceHead)*CENTRIFUGAL_FORCE
-        )
-        velocity = velocity * (1-fric)
+        local force = vec(0, 0, 0)
 
-        rot = rot + velocity
-    end
-    if limits ~= nil then function events.tick()
-        if not handler.enabled then return end
-        if rot.x < limits[1] then rot.x = limits[1] velocity.x = 0 end
-        if rot.x > limits[2] then rot.x = limits[2] velocity.x = 0 end
-        if rot.y < limits[3] then rot.y = limits[3] velocity.y = 0 end
-        if rot.y > limits[4] then rot.y = limits[4] velocity.y = 0 end
-        if rot.z < limits[5] then rot.z = limits[5] velocity.z = 0 end
-        if rot.z > limits[6] then rot.z = limits[6] velocity.z = 0 end
-    end end
-    function events.render(delta)
-        if not handler.enabled then return end
+        force.x = sin_rad(angleToCenter) * forcePart - cos_rad(moveAngle) * playerSpeed + cos_rad(angleToCenter) * math.abs(forcePart) * CENTRIFUGAL_FORCE
+        force.z = cos_rad(angleToCenter) * forcePart + sin_rad(moveAngle) * playerSpeed - sin_rad(angleToCenter) * math.abs(forcePart) * CENTRIFUGAL_FORCE
 
-        part:setOffsetRot(math.lerp(_rot, rot, delta))
-    end
-    return handler
-end
---- Adds swinging physics to a part that is attached to the body
----@param part ModelPart The model part that should swing
----@param dir number Angle in degree, where the part is located relative to the center of the head. Imagine a stick pointing out in that direction with the model part hanging from its end. 0 means forward, 45 means diagonally forward and left, 90 means straight left and so on
----@param limits table|nil Limits the rotation of the part to make it appear like its colliding with something. Format: {xLow, xHigh, yLow, yHigh, zLow, zHigh} (optional)
----@param root ModelPart|nil Required if it is part of a chain. Note that the first chain element does not need this root parameter, and does also not need the depth parameter. Only following chain links need it.
----@param depth number|nil An integer that should increase by 1 for each consecutive chain link after the root. The root itself doesnt need this parameter. This increases the friction which makes it look more realistic.
----@return SwingHandler
-function lib.swingOnBody(part, dir, limits, root, depth)
-    assert(part, "Model Part does not exist!")
-    local _rot = vec(0,0,0)
-    local rot = vec(0,0,0)
-    local velocity = vec(0,0,0)
-    if depth == nil then depth = 0 end
-    local fric = FRICTION*math.pow(1.5, depth)
-    local handler = {
-        ---@type SwingHandler
-    }
-    handler.enabled = true
-    ---@param enabled boolean
-    function handler:setEnabled(enabled)
-        self.enabled = enabled
-        if not self.enabled then
-            rot = vec(0,0,0)
-            _rot = rot
-            part:setOffsetRot(rot)
+        velocity = (velocity + gravity + force) * (1-_FRICTION)
+        rotation = rotation + velocity
+
+        if limits ~= nil then 
+            if not handler.enabled then return end
+            
+            if rotation.x < limits[1] then rotation.x = limits[1] velocity.x = 0 end
+            if rotation.x > limits[2] then rotation.x = limits[2] velocity.x = 0 end
+            if rotation.y < limits[3] then rotation.y = limits[3] velocity.y = 0 end
+            if rotation.y > limits[4] then rotation.y = limits[4] velocity.y = 0 end
+            if rotation.z < limits[5] then rotation.z = limits[5] velocity.z = 0 end
+            if rotation.z > limits[6] then rotation.z = limits[6] velocity.z = 0 end
         end
-    end
-    function events.tick()
+    end)
+
+    events.render:register(function(delta)
         if not handler.enabled then return end
 
-        _rot = rot
+        part:setOffsetRot(math.lerp(_rotation, rotation, delta))
+    end)
 
-        local grav
-        if root ~= nil then
-            grav = ((downBody - root:getOffsetRot()) - rot) * GRAVITY
-        else
-            grav = (downBody - rot) * GRAVITY
-        end
-
-        velocity = velocity + grav + vec(
-            sin_rad(dir)*forceBody-cos_rad(moveAngle)*playerSpeed+cos_rad(dir)*math.abs(forceBody)*CENTRIFUGAL_FORCE,
-            0,
-            cos_rad(dir)*forceBody+sin_rad(moveAngle)*playerSpeed-sin_rad(dir)*math.abs(forceBody)*CENTRIFUGAL_FORCE
-        )
-        velocity = velocity * (1-fric)
-
-        rot = rot + velocity
-    end
-    if limits ~= nil then function events.tick()
-        if not handler.enabled then return end
-
-        if rot.x < limits[1] then rot.x = limits[1] velocity.x = 0 end
-        if rot.x > limits[2] then rot.x = limits[2] velocity.x = 0 end
-        if rot.y < limits[3] then rot.y = limits[3] velocity.y = 0 end
-        if rot.y > limits[4] then rot.y = limits[4] velocity.y = 0 end
-        if rot.z < limits[5] then rot.z = limits[5] velocity.z = 0 end
-        if rot.z > limits[6] then rot.z = limits[6] velocity.z = 0 end
-    end end
-    function events.render(delta)
-        if not handler.enabled then return end
-
-        part:setOffsetRot(math.lerp(_rot, rot, delta))
-    end
     return handler
 end
 
