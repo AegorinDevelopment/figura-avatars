@@ -118,10 +118,12 @@ local SwingHandler = {
     setEnabled = function(self, enabled) end
 }
 
+--- @alias SwingLimits {xMin: number, xMax: number, yMin: number, yMax: number, zMin: number, zMax: number}
+
 --- Adds swinging physics to a part that is attached to the head or body
 --- @param part ModelPart The model part that should swing
 --- @param type "Head"|"Body" Parent type the physics should use
---- @param limits table|nil Limits the rotation of the part to make it appear like its colliding with something. Format: {xLow, xHigh, yLow, yHigh, zLow, zHigh} (optional)
+--- @param limits SwingLimits|nil Limits the rotation of the part to make it appear like its colliding with something. Format: {xMin: number, xMax: number, yMin: number, yMax: number, zMin: number, zMax: number} (optional)
 --- @param root ModelPart|nil Required if it is part of a chain. Note that the first chain element does not need this root parameter, and does also not need the depth parameter. Only following chain links need it.
 --- @param depth number|nil An integer that should increase by 1 for each consecutive chain link after the root. The root itself doesnt need this parameter. This increases the friction which makes it look more realistic.
 --- @return SwingHandler
@@ -190,12 +192,12 @@ function lib.setSwing(part, type, limits, root, depth)
         if limits ~= nil then 
             if not handler.enabled then return end
             
-            if rotation.x < limits[1] then rotation.x = limits[1] velocity.x = 0 end
-            if rotation.x > limits[2] then rotation.x = limits[2] velocity.x = 0 end
-            if rotation.y < limits[3] then rotation.y = limits[3] velocity.y = 0 end
-            if rotation.y > limits[4] then rotation.y = limits[4] velocity.y = 0 end
-            if rotation.z < limits[5] then rotation.z = limits[5] velocity.z = 0 end
-            if rotation.z > limits[6] then rotation.z = limits[6] velocity.z = 0 end
+            if rotation.x < limits.xMin then rotation.x = limits.xMin velocity.x = 0 end
+            if rotation.x > limits.xMax then rotation.x = limits.xMax velocity.x = 0 end
+            if rotation.y < limits.yMin then rotation.y = limits.yMin velocity.y = 0 end
+            if rotation.y > limits.yMax then rotation.y = limits.yMax velocity.y = 0 end
+            if rotation.z < limits.zMin then rotation.z = limits.zMin velocity.z = 0 end
+            if rotation.z > limits.zMax then rotation.z = limits.zMax velocity.z = 0 end
         end
     end)
 
