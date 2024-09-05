@@ -36,7 +36,7 @@ number twice toggles the emotes off.
 
 ### Chat Preview
 When typing a preview of your message is shown between the chat and the input. 
-This uses common roleplay formattings (`* [ ( > etc.`) to colorcode text.
+This uses common roleplay formatting (`* [ ( > etc.`) to color code text.
 
 ### Show Typing
 Others are able to see when you are typing in your nameplate and on the TAB view. 
