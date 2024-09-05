@@ -19,8 +19,6 @@ DEFAULT_HEIGHT = 187.5
 
 ScaleValue = 1
 
-vanilla_model.PLAYER:setVisible(false)
-
 local parts = require("lib.loadParts")
 
 
@@ -42,6 +40,8 @@ function ResizeModel(height)
 end
 
 function events.entity_init()
+    vanilla_model.PLAYER:setVisible(false)
+    
     parts.loadCustomParts()
 
     if config:load("height") then
