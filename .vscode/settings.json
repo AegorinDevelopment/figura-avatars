@@ -7,5 +7,14 @@
   ],
   "[lua]": {
     "editor.suggest.showDeprecated": false
-  }
+  },
+  "spellright.language": [
+    "de",
+    "en"
+  ],
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext"
+  ]
 }
