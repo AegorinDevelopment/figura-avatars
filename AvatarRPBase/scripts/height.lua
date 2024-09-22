@@ -52,13 +52,6 @@ function events.entity_init()
     
     pings.setModelType(player:getModelType())
 
-    -- IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
-
-    -- models.avatar.root.LeftArm.LA_Default:setVisible(IS_DEFAULT_TYPE)
-    -- models.avatar.root.RightArm.RA_Default:setVisible(IS_DEFAULT_TYPE)
-    -- models.avatar.root.LeftArm.LA_Slim:setVisible(not IS_DEFAULT_TYPE)
-    -- models.avatar.root.RightArm.RA_Slim:setVisible(not IS_DEFAULT_TYPE)
-
     if USE_SKIN then
         models.avatar.root.Head.H_Default:setPrimaryTexture("SKIN")
         models.avatar.root.Body.B_Default:setPrimaryTexture("SKIN")
