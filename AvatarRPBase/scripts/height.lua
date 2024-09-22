@@ -19,8 +19,6 @@ DEFAULT_HEIGHT = 187.5
 
 ScaleValue = 1
 
-vanilla_model.PLAYER:setVisible(false)
-
 local parts = require("lib.loadParts")
 
 
@@ -42,6 +40,8 @@ function ResizeModel(height)
 end
 
 function events.entity_init()
+    vanilla_model.PLAYER:setVisible(false)
+    
     parts.loadCustomParts()
 
     if config:load("height") then
@@ -50,12 +50,7 @@ function events.entity_init()
         pings.setHeight(DEFAULT_HEIGHT)
     end
     
-    IS_DEFAULT_TYPE = player:getModelType() == "DEFAULT"
-
-    models.avatar.root.LeftArm.LA_Default:setVisible(IS_DEFAULT_TYPE)
-    models.avatar.root.RightArm.RA_Default:setVisible(IS_DEFAULT_TYPE)
-    models.avatar.root.LeftArm.LA_Slim:setVisible(not IS_DEFAULT_TYPE)
-    models.avatar.root.RightArm.RA_Slim:setVisible(not IS_DEFAULT_TYPE)
+    pings.setModelType(player:getModelType())
 
     if USE_SKIN then
         models.avatar.root.Head.H_Default:setPrimaryTexture("SKIN")
@@ -90,19 +85,37 @@ function pings.setHeight(height)
     end
 end
 
+--- @alias model_type "DEFAULT" | "SLIM" 
 
--- Update the height every few seconds
-local HEIGHT_INTERVAL = 100
-local height_timer = 0
+--- Updates the model type
+--- @param type model_type
+function pings.setModelType(type)
+    if type == "DEFAULT" then
+        models.avatar.root.LeftArm.LA_Default:setVisible(true)
+        models.avatar.root.RightArm.RA_Default:setVisible(true)
+        models.avatar.root.LeftArm.LA_Slim:setVisible(false)
+        models.avatar.root.RightArm.RA_Slim:setVisible(false)
+    else
+        models.avatar.root.LeftArm.LA_Default:setVisible(false)
+        models.avatar.root.RightArm.RA_Default:setVisible(false)
+        models.avatar.root.LeftArm.LA_Slim:setVisible(true)
+        models.avatar.root.RightArm.RA_Slim:setVisible(true)
+    end
+end
+
+
+-- Update the avatar every few seconds
+local UPDATE_INTERVAL = 100
+local update_timer = 0
 
 events.TICK:register(function()
     if not player:isLoaded() then return end
 
-    if height_timer > 0 then
-        height_timer = height_timer - 1
+    if update_timer > 0 then
+        update_timer = update_timer - 1
         return
     else
-        height_timer = HEIGHT_INTERVAL
+        update_timer = UPDATE_INTERVAL
     end
 
     if config:load("height") then
@@ -110,4 +123,6 @@ events.TICK:register(function()
     else
         pings.setHeight(DEFAULT_HEIGHT)
     end
-end, "heightUpdate")
+
+    pings.setModelType(player:getModelType())
+end, "avatarUpdate")
