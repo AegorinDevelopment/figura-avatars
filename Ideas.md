@@ -20,6 +20,9 @@ Testing one of the physics libraries to dynamically add physics to custom parts
 - Change on pose
 - Allow toggle with hotkey
 
+## Avatar size reduction
+- Load host scripts only for host
+
 ## Custom UI elements
 - Expanding the ui with custom elements to add macros and inputs
 - All local scripts to keep the avatar size small
