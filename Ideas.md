@@ -19,3 +19,18 @@ Testing one of the physics libraries to dynamically add physics to custom parts
 - Change with height (all 3 cameras)
 - Change on pose
 - Allow toggle with hotkey
+
+## Custom UI elements
+- Expanding the ui with custom elements to add macros and inputs
+- All local scripts to keep the avatar size small
+
+### Lib for dynamic text input as ui overlay
+- Input text in a defined text field, that does not trigger other options
+
+### Automatic input translation
+- Input that automatically translates text
+
+### Custom macros
+- Command buttons
+- Chat switcher
+- Custom (player) notes
